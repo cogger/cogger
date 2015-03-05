@@ -10,6 +10,7 @@ import (
 //Handler defines a interface that extends net.Handler interface to have the ability to modify the context of a function
 type Handler interface {
 	SetTimeout(time.Duration) Handler
+	SetBase(func(*http.Request) context.Context) Handler
 	AddContext(...func(context.Context, *http.Request) context.Context) Handler
 	SetHandler(func(context.Context, http.ResponseWriter, *http.Request) int) Handler
 	ServeHTTP(http.ResponseWriter, *http.Request)
@@ -18,6 +19,7 @@ type Handler interface {
 type defaultHandler struct {
 	f           func(context.Context, http.ResponseWriter, *http.Request) int
 	timeout     time.Duration
+	base        func(*http.Request) context.Context
 	ctxCreators []func(context.Context, *http.Request) context.Context
 }
 
@@ -25,17 +27,27 @@ func noOp(ctx context.Context, writer http.ResponseWriter, req *http.Request) in
 	return http.StatusInternalServerError
 }
 
+func baseContext(req *http.Request) context.Context {
+	return context.Background()
+}
+
 //NewHandler creats a Handler interface with the default implementation
 func NewHandler() Handler {
 	return &defaultHandler{
 		f:           noOp,
 		timeout:     30 * time.Second,
+		base:        baseContext,
 		ctxCreators: []func(context.Context, *http.Request) context.Context{},
 	}
 }
 
 func (h *defaultHandler) SetTimeout(t time.Duration) Handler {
 	h.timeout = t
+	return h
+}
+
+func (h *defaultHandler) SetBase(base func(*http.Request) context.Context) Handler {
+	h.base = base
 	return h
 }
 
@@ -50,7 +62,7 @@ func (h *defaultHandler) SetHandler(f func(context.Context, http.ResponseWriter,
 }
 
 func (h *defaultHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	ctx, cancel := context.WithTimeout(context.Background(), h.timeout)
+	ctx, cancel := context.WithTimeout(h.base(r), h.timeout)
 	defer cancel()
 	for _, creator := range h.ctxCreators {
 		ctx = creator(ctx, r)
