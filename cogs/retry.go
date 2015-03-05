@@ -1,0 +1,47 @@
+package cogs
+
+import (
+	"errors"
+	"math"
+	"time"
+
+	"github.com/cogger/cogger"
+	"golang.org/x/net/context"
+)
+
+//ErrRetry is the error that should be returned when a Retry cog should retry
+var ErrRetry = errors.New("retry")
+
+//Retry will continue to retry a cog until it passes, a none ErrRetry error is returned or the context finishes.
+func Retry(ctx context.Context, work func() error) cogger.Cog {
+	return cogger.NewCog(func() chan error {
+		out := make(chan error)
+		inner := make(chan error)
+
+		go func() {
+			defer close(inner)
+			attempts := 0.0
+			err := ErrRetry
+			for err == ErrRetry && ctx.Err() == nil {
+				attempts++
+				err = work()
+				if err == ErrRetry {
+					time.Sleep(time.Duration(math.Pow(50.0, attempts)))
+				}
+			}
+			inner <- err
+		}()
+
+		go func() {
+			defer close(out)
+			select {
+			case <-ctx.Done():
+				out <- ctx.Err()
+			case i := <-inner:
+				out <- i
+			}
+		}()
+
+		return out
+	})
+}
