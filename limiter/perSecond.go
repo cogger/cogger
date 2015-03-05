@@ -25,8 +25,8 @@ func (limit timeLimit) Next(ctx context.Context) chan struct{} {
 
 func (limit timeLimit) Done(ctx context.Context) {}
 
-//PerSecond creators a cog limiter that limits the number of working cogs to the the provided number per second.
-//This limiter does not ensure that the previous functions have completed for another is started but only that
+//PerSecond creates a cog limiter that limits the number of working cogs to the provided number per second.
+//This limiter does not ensure that the previous functions have completed before another is started but only that
 //X functions will be started per second
 func PerSecond(count int) (Limit, error) {
 	if count <= 0 {

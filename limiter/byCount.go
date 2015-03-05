@@ -25,7 +25,7 @@ func (limit countLimit) Done(ctx context.Context) {
 	}
 }
 
-//ByCount creators a cog limiter that limits the number of working cogs to the ammount provided to this function.
+//ByCount creates a cog limiter that limits the number of working cogs to the ammount provided to this function.
 func ByCount(alive int) (Limit, error) {
 	if alive <= 0 {
 		return nil, ErrLimitConfig

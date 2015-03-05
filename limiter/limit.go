@@ -15,5 +15,5 @@ type Limit interface {
 	Done(ctx context.Context)
 }
 
-//ErrLimitConfig is is the error for a limti beign configured incorrectly.
+//ErrLimitConfig is the error for a limti being configured incorrectly.
 var ErrLimitConfig = errors.New("limit was not configured correctly")

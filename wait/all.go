@@ -7,7 +7,7 @@ import (
 	"golang.org/x/net/context"
 )
 
-//All will execute all cogs provided in parallel and will return when the first one fails or all successed
+//All will execute all cogs provided in parallel and will return when the first one fails or all succeed
 func All(ctx context.Context, cogs ...cogger.Cog) cogger.Cog {
 	return cogger.NewCog(func() chan error {
 		out := make(chan error, 1)

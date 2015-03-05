@@ -7,7 +7,7 @@ import (
 	"golang.org/x/net/context"
 )
 
-//Parallel will execute all functions is parallel that can be executed.
+//Parallel will execute all functions in parallel that can be executed.
 func Parallel(ctx context.Context, cogs ...cogger.Cog) cogger.Cog {
 	return cogger.NewCog(func() chan error {
 		out := make(chan error, len(cogs))

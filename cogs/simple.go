@@ -5,7 +5,7 @@ import (
 	"golang.org/x/net/context"
 )
 
-//Simple will create a cog that follow the basic context cancellation pattern
+//Simple will create a cog that follows the basic context cancellation pattern
 func Simple(ctx context.Context, work func() error) cogger.Cog {
 	return cogger.NewCog(func() chan error {
 		out := make(chan error)
