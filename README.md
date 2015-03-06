@@ -140,12 +140,9 @@ import (
 	"time"
 )
 
-
 func doSomething() error{
 	return nil
 }
-
-
 
 func main() {
   	cogger.With(func(ctx context.Context){
