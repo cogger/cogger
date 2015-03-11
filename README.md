@@ -32,7 +32,7 @@ func fooHandler(ctx context.Context, w http.ResponseWriter, r *http.Request) int
 }
 
 func main() {
-  	http.Handle("/foo", cogger.NewHandler().AddContext(...something).SetHandler(fooHandler))
+  	http.Handle("/foo", cogger.WithHandler(fooHandler))
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 

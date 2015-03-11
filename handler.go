@@ -25,6 +25,13 @@ func noOp(ctx context.Context, writer http.ResponseWriter, req *http.Request) in
 	return http.StatusInternalServerError
 }
 
+//WithHandler is a alias for cogger.NewHandler().SetHandler(f)
+func WithHandler(f func(context.Context, http.ResponseWriter, *http.Request) int) Handler {
+	h := NewHandler()
+	h.SetHandler(f)
+	return h
+}
+
 //NewHandler creats a Handler interface with the default implementation
 func NewHandler() Handler {
 	return &defaultHandler{
