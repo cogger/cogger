@@ -1,13 +1,16 @@
 # cogger [![GoDoc](https://godoc.org/github.com/cogger/cogger?status.png)](http://godoc.org/github.com/cogger/cogger)
 
-cogger is a package that extends golang.org/x/net/context with additional helper functions to make it easy to implement the context pattern as dicussed at blog.golang.org/context.  It allows you to manage mutliple construction and tear down of go coroutines, scopes items on your context per request and generally makes your program to appear sequential while still being highly concurrent.
+cogger is a package that extends [golang.org/x/net/context](https://godoc.org/golang.org/x/oauth2) with additional helper functions to make it easy to implement the context pattern as dicussed at [blog.golang.org/context](https://blog.golang.org/context).  It allows you to manage mutliple construction and tear down of go coroutines, scopes items on your context per request and generally makes your program to appear sequential while still being highly concurrent.
 
 ## Usage
 
-You can use cogger to help manage http handler functions.
+###Step 1: set your context scope 
 
+You can set your scope to be either an http.Handler or use a wrapper function to create a scope without an http.Handler.
+You should only use 1 scope per execution because each scope will define it's own independant base context.
+
+####http.Handler scoped
 ~~~ go
-// main.go
 package main
 
 import (
@@ -35,8 +38,7 @@ func main() {
 
 ~~~
 
-You can use cogger without http handler functions.
-
+####Wrapper defined scope
 ~~~ go
 // main.go
 package main
@@ -54,10 +56,41 @@ func main() {
 
 ~~~
 
-You can manage complex task execution.
+####Step2: Modify your context
+You can attach additional data to your context such as google cloud compute or http.Clients
+~~~ go
+package main
+
+import (
+	"log"
+	"net/http"
+	"github.com/cogger/cogger"
+	"github.com/cogger/cloudcontext"
+	"github.com/cogger/cloudcontext/client"
+	"github.com/cogger/cloudcontext/bq"
+	"golang.org/x/net/context"
+)
+
+func foo(ctx context.Context, w http.ResponseWriter, r *http.Request) int{
+	service := bq.FromContext(ctx)
+	//Do something with bigquery
+	return http.StatusOK
+}
+
+func init() {
+	fooHandler := cogger.NewHandler()
+	fooHandler.AddContext(client.Compute, cloudcontext.Add)
+	fooHandler.SetHandler(foo)
+
+  	http.Handle("/foo", fooHandler)
+  	log.Fatal(http.ListenAndServe(":8080", nil))
+}
+~~~
+
+####Step3: Define your cog interactions
+You can setup complex interactions on how you want your cogs to run.  This will allow you to use order.Parallel or order.Series.  You can determine how to handle your parallel executions. Such as wait.All says all cogs must succeed, wait.Settle will wait all to finish before returning the errors or wait.Any will wait for the first cog to finish and return.  You can determine if cogs should retry on error, have and independant timeout or just execute once.
 
 ~~~ go
-// main.go
 package main
 
 import (
@@ -125,8 +158,8 @@ func main() {
 
 ~~~
 
-You can set limits on how many cogs you want working at any given point.
-
+####Step4: Set your limites
+You can determine how cogs are limited.  You can allows X cogs to start per second or determine how many cogs can run at once.  Warning this can cause deadlocks.
 ~~~ go
 // main.go
 package main
