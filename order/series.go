@@ -11,15 +11,17 @@ func Series(ctx context.Context, cogs ...cogger.Cog) cogger.Cog {
 	return cogger.NewCog(func() chan error {
 		out := make(chan error, len(cogs))
 		go func() {
+			defer close(out)
 			for _, cog := range cogs {
 				select {
 				case <-ctx.Done():
 					out <- ctx.Err()
 				case err := <-cog.Do(ctx):
-					out <- err
+					if err != nil {
+						out <- err
+					}
 				}
 			}
-			close(out)
 		}()
 		return out
 	})

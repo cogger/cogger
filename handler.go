@@ -18,7 +18,6 @@ type Handler interface {
 type defaultHandler struct {
 	f           func(context.Context, http.ResponseWriter, *http.Request) int
 	timeout     time.Duration
-	base        func(*http.Request) context.Context
 	ctxCreators []func(context.Context, *http.Request) context.Context
 }
 
@@ -31,7 +30,6 @@ func NewHandler() Handler {
 	return &defaultHandler{
 		f:           noOp,
 		timeout:     30 * time.Second,
-		base:        baseContext,
 		ctxCreators: []func(context.Context, *http.Request) context.Context{},
 	}
 }
