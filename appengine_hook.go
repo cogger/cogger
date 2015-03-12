@@ -1,4 +1,4 @@
-// +build appengine,appenginevm
+// +build appengine appenginevm
 
 package cogger
 
@@ -10,7 +10,7 @@ import (
 )
 
 func init() {
-	base = func(request http.Request) context.Context {
+	base = func(request *http.Request) context.Context {
 		return appengine.NewContext(request)
 	}
 }
