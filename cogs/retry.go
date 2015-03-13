@@ -13,7 +13,8 @@ import (
 var ErrRetry = errors.New("retry")
 
 //Retry will continue to retry a cog until it passes, a none ErrRetry error is returned or the context finishes.
-func Retry(ctx context.Context, work func() error) cogger.Cog {
+func Retry(ctx context.Context, work func() error, max int) cogger.Cog {
+	maxAttempts := float64(max)
 	return cogger.NewCog(func() chan error {
 		out := make(chan error)
 		inner := make(chan error)
@@ -22,7 +23,7 @@ func Retry(ctx context.Context, work func() error) cogger.Cog {
 			defer close(inner)
 			attempts := 0.0
 			err := ErrRetry
-			for err == ErrRetry && ctx.Err() == nil {
+			for err == ErrRetry && ctx.Err() == nil && attempts < maxAttempts {
 				attempts++
 				err = work()
 				if err == ErrRetry {

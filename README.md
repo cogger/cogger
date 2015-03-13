@@ -144,10 +144,10 @@ func main() {
   			makeResultWorker,
   			wait.Settle(ctx, work.Retry(ctx, func()error{
 	  			return saveResultToFile(result)
-	  		}),
+	  		},10),
 	  		work.Retry(ctx, func()error{
 	  			return saveResultToDB(result)
-	  		}),
+	  		},10),
   		)).Do()
   		
   		if err != nil {
