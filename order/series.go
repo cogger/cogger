@@ -13,10 +13,11 @@ func Series(ctx context.Context, cogs ...cogger.Cog) cogger.Cog {
 		go func() {
 			defer close(out)
 			for _, cog := range cogs {
-				select {
-				case <-ctx.Done():
-					out <- ctx.Err()
-				case err := <-cog.Do(ctx):
+				for err := range cog.Do(ctx) {
+					if ctx.Err() != nil {
+						out <- err
+						break
+					}
 					if err != nil {
 						out <- err
 					}
