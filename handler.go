@@ -13,6 +13,7 @@ type Handler interface {
 	AddContext(...func(context.Context, *http.Request) context.Context) Handler
 	SetHandler(func(context.Context, http.ResponseWriter, *http.Request) int) Handler
 	ServeHTTP(http.ResponseWriter, *http.Request)
+	Test(context.Context, http.ResponseWriter, *http.Request) int
 }
 
 type defaultHandler struct {
@@ -66,4 +67,8 @@ func (h *defaultHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if status >= http.StatusBadRequest {
 		http.Error(w, http.StatusText(status), status)
 	}
+}
+
+func (h *defaultHandler) Test(ctx context.Context, w http.ResponseWriter, r *http.Request) int {
+	return h.f(ctx, w, r)
 }
