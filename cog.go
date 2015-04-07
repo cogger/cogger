@@ -22,8 +22,8 @@ func (cog *defaultCog) Do(ctx context.Context) chan error {
 		go func() {
 			defer cog.limit.Done(ctx)
 			defer close(out)
-			err := <-cog.Do(ctx)
-			out <- err
+			<-cog.limit.Next(ctx)
+			out <- <-cog.f()
 		}()
 		return out
 	}
