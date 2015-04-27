@@ -27,7 +27,7 @@ func Retry(ctx context.Context, work func() error, max int) cogger.Cog {
 				attempts++
 				err = work()
 				if err == ErrRetry {
-					time.Sleep(time.Duration(math.Pow(50.0, attempts)))
+					time.Sleep(time.Duration(math.Pow(2.0, attempts)) * time.Millisecond)
 				}
 			}
 			inner <- err

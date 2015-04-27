@@ -13,13 +13,15 @@ func Series(ctx context.Context, cogs ...cogger.Cog) cogger.Cog {
 		go func() {
 			defer close(out)
 			for _, cog := range cogs {
-				for err := range cog.Do(ctx) {
-					if ctx.Err() != nil {
-						out <- err
-						break
-					}
-					if err != nil {
-						out <- err
+				if ctx.Err() == nil {
+					for err := range cog.Do(ctx) {
+						if ctx.Err() != nil {
+							out <- err
+							break
+						}
+						if err != nil {
+							out <- err
+						}
 					}
 				}
 			}

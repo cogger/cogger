@@ -63,7 +63,19 @@ func (h *defaultHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	for _, creator := range h.ctxCreators {
 		ctx = creator(ctx, r)
 	}
-	status := h.f(ctx, w, r)
+
+	output := make(chan int)
+	var status int
+	go func() {
+		output <- h.f(ctx, w, r)
+	}()
+
+	select {
+	case <-ctx.Done():
+		status = http.StatusInternalServerError
+	case status = <-output:
+	}
+
 	if status >= http.StatusBadRequest {
 		http.Error(w, http.StatusText(status), status)
 	}

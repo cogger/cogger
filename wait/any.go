@@ -27,7 +27,7 @@ func Any(ctx context.Context, cogs ...cogger.Cog) cogger.Cog {
 				case <-ctx.Done():
 					out <- ctx.Err()
 				case err := <-cog.Do(ctx):
-					if err == nil {
+					if err == nil && ctx.Err() == nil {
 						out <- nil
 						close(first)
 					}
