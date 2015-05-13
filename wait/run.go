@@ -8,7 +8,7 @@ import (
 //NoBlock runs a cog and shallows all errors and blockers
 func NoBlock(ctx context.Context, cog cogger.Cog) {
 	go func() {
-		for range cog.Do(ctx) {
+		for _ = range cog.Do(ctx) {
 		}
 	}()
 }

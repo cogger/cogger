@@ -8,9 +8,7 @@ import (
 //Completed runs a cog and shallows all errors and blockers
 func Completed(ctx context.Context, cog cogger.Cog, completed func()) {
 	go func() {
-		for range cog.Do(ctx) {
-		}
-		completed()
-
+		defer completed()
+		Resolve(ctx, cog)
 	}()
 }
