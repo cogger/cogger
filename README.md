@@ -9,7 +9,7 @@ cogger is a package that extends [golang.org/x/net/context](https://godoc.org/go
 
 ## Usage
 
-###Step 1: set your context scope 
+###Step 1: Set your context scope 
 
 You can set your scope to be either an http.Handler or use a wrapper function to create a scope without an http.Handler.
 You should only use 1 scope per execution because each scope will define it's own independant base context.
