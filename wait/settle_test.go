@@ -54,7 +54,7 @@ var _ = Describe("Settle", func() {
 	})
 
 	It("should exit if context is canceled before completion", func() {
-		ctx, cancel := context.WithTimeout(context.Background(), 50*time.Millisecond)
+		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Millisecond)
 		defer cancel()
 
 		cog := Settle(ctx,
