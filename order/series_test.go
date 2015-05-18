@@ -123,7 +123,8 @@ var _ = Describe("Series", func() {
 			}),
 		)
 
-		for range cog.Do(ctx) {
+		for err := range cog.Do(ctx) {
+			Expect(err).ToNot(HaveOccurred())
 		}
 
 		for i, o := range order {
