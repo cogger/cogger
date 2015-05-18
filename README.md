@@ -9,6 +9,14 @@
 
 cogger is a package that extends [golang.org/x/net/context](https://godoc.org/golang.org/x/oauth2) with additional helper functions to make it easy to implement the context pattern as dicussed at [blog.golang.org/context](https://blog.golang.org/context).  It allows you to manage mutliple construction and tear down of go coroutines, scopes items on your context per request and generally makes your program to appear sequential while still being highly concurrent.
 
+## Installation
+
+The import path for the package is *gopkg.in/cogger/cogger.v1*.
+
+To install it, run:
+
+    go get gopkg.in/cogger/cogger.v1
+    
 ## Usage
 
 ###Step 1: Set your context scope 
