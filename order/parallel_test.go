@@ -54,47 +54,34 @@ var _ = Describe("Parallel", func() {
 	})
 
 	It("should exit if context is canceled before completion", func() {
-		ctx, cancel := context.WithTimeout(context.Background(), 50*time.Millisecond)
+		ctx, cancel := context.WithTimeout(context.Background(), 1*time.Millisecond)
 		defer cancel()
 
-		order := []int{}
 		cog := Parallel(ctx,
 			cogs.Simple(ctx, func() error {
-				time.Sleep(100 * time.Millisecond)
-				order = append(order, 4)
+				time.Sleep(10 * time.Millisecond)
 				return nil
 			}),
 			cogs.Simple(ctx, func() error {
-				time.Sleep(75 * time.Millisecond)
-				order = append(order, 3)
+				time.Sleep(10 * time.Millisecond)
 				return nil
 			}),
 			cogs.Simple(ctx, func() error {
-				time.Sleep(50 * time.Millisecond)
-				order = append(order, 2)
+				time.Sleep(10 * time.Millisecond)
 				return nil
 			}),
 			cogs.Simple(ctx, func() error {
-				time.Sleep(25 * time.Millisecond)
-				order = append(order, 1)
+				time.Sleep(10 * time.Millisecond)
 				return nil
 			}),
 			cogs.Simple(ctx, func() error {
-				order = append(order, 0)
+				time.Sleep(10 * time.Millisecond)
 				return nil
 			}),
 		)
 
-		count := 0
 		for err := range cog.Do(ctx) {
-			if count < 2 {
-				Expect(err).To(BeNil())
-			} else {
-				Expect(err).To(Equal(context.DeadlineExceeded))
-			}
-			count++
+			Expect(err).To(Equal(context.DeadlineExceeded))
 		}
-
-		Expect(count).To(Equal(5))
 	})
 })
