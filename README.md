@@ -1,11 +1,9 @@
 # cogger 
 
-**Documentation:** [![GoDoc](https://godoc.org/github.com/cogger/cogger?status.png)](http://godoc.org/github.com/cogger/cogger)  
-**Build Status:** [![Build Status](https://travis-ci.org/cogger/cogger.svg?branch=master)](https://travis-ci.org/cogger/cogger)  
-**Test Coverage:** [![Coverage Status](https://coveralls.io/repos/cogger/cogger/badge.svg?branch=master)](https://coveralls.io/r/cogger/cogger?branch=master)  
-**License:**       [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
-
-
+[![GoDoc](https://godoc.org/github.com/cogger/cogger?status.png)](http://godoc.org/github.com/cogger/cogger)  
+[![Build Status](https://travis-ci.org/cogger/cogger.svg?branch=master)](https://travis-ci.org/cogger/cogger)  
+[![Coverage Status](https://coveralls.io/repos/cogger/cogger/badge.svg?branch=master)](https://coveralls.io/r/cogger/cogger?branch=master)  
+[![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 cogger is a package that extends [golang.org/x/net/context](https://godoc.org/golang.org/x/oauth2) with additional helper functions to make it easy to implement the context pattern as dicussed at [blog.golang.org/context](https://blog.golang.org/context).  It allows you to manage mutliple construction and tear down of go coroutines, scopes items on your context per request and generally makes your program to appear sequential while still being highly concurrent.
 
