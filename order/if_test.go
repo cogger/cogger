@@ -42,4 +42,30 @@ var _ = Describe("If", func() {
 		})).Do(ctx)).To(Equal(context.DeadlineExceeded))
 		Expect(ran).To(BeFalse())
 	})
+
+	It("should not execute the check until the cog is run", func() {
+		ctx := context.Background()
+		check := false
+		Series(ctx,
+			cogs.Simple(ctx, func() error {
+				check = true
+				return nil
+			}),
+			If(ctx,
+				func() bool {
+					Expect(check).To(BeTrue())
+					check = false
+					return true
+				},
+				cogs.NoOp(),
+			),
+			If(ctx,
+				func() bool {
+					Expect(check).To(BeFalse())
+					return true
+				},
+				cogs.NoOp(),
+			),
+		)
+	})
 })
