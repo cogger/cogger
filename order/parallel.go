@@ -3,8 +3,8 @@ package order
 import (
 	"sync"
 
-	"github.com/cogger/cogger"
 	"golang.org/x/net/context"
+	"gopkg.in/cogger/cogger.v1"
 )
 
 //Parallel will execute all functions in parallel that can be executed.

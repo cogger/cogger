@@ -4,11 +4,11 @@ import (
 	"errors"
 	"reflect"
 
-	"github.com/cogger/cogger"
-	. "github.com/cogger/cogger/cogs"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"golang.org/x/net/context"
+	"gopkg.in/cogger/cogger.v1"
+	. "gopkg.in/cogger/cogger.v1/cogs"
 )
 
 var _ = Describe("ReturnErr", func() {

@@ -1,8 +1,8 @@
 package wait
 
 import (
-	"github.com/cogger/cogger"
 	"golang.org/x/net/context"
+	"gopkg.in/cogger/cogger.v1"
 )
 
 //Completed runs a cog and shallows all errors and blockers

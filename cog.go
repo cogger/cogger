@@ -1,7 +1,8 @@
 package cogger
 
 import (
-	"github.com/cogger/cogger/limiter"
+	"gopkg.in/cogger/cogger.v1/limiter"
+	// "gopkg.in/cogger/cogger.v1/limiter"
 	"golang.org/x/net/context"
 )
 

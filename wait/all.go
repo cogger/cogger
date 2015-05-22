@@ -3,8 +3,8 @@ package wait
 import (
 	"sync"
 
-	"github.com/cogger/cogger"
 	"golang.org/x/net/context"
+	"gopkg.in/cogger/cogger.v1"
 )
 
 //All will execute all cogs provided in parallel and will return when the first one fails or all succeed

@@ -3,9 +3,9 @@ package order_test
 import (
 	"time"
 
-	"github.com/cogger/cogger/cogs"
-	. "github.com/cogger/cogger/order"
 	"golang.org/x/net/context"
+	"gopkg.in/cogger/cogger.v1/cogs"
+	. "gopkg.in/cogger/cogger.v1/order"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
