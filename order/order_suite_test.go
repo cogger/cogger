@@ -1,4 +1,4 @@
-package order_test
+package order
 
 import (
 	. "github.com/onsi/ginkgo"

@@ -1,4 +1,4 @@
-package wait_test
+package wait
 
 import (
 	. "github.com/onsi/ginkgo"

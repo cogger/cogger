@@ -1,4 +1,4 @@
-package cogger_test
+package cogger
 
 import (
 	. "github.com/onsi/ginkgo"

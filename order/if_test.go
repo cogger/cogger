@@ -1,11 +1,10 @@
-package order_test
+package order
 
 import (
 	"time"
 
 	"golang.org/x/net/context"
 	"gopkg.in/cogger/cogger.v1/cogs"
-	. "gopkg.in/cogger/cogger.v1/order"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

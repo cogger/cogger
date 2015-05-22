@@ -1,11 +1,10 @@
-package cogs_test
+package cogs
 
 import (
 	"reflect"
 
 	"golang.org/x/net/context"
 	"gopkg.in/cogger/cogger.v1"
-	. "gopkg.in/cogger/cogger.v1/cogs"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

@@ -1,4 +1,4 @@
-package limiter_test
+package limiter
 
 import (
 	. "github.com/onsi/ginkgo"

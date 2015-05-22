@@ -1,4 +1,4 @@
-package cogs_test
+package cogs
 
 import (
 	"errors"
@@ -8,7 +8,6 @@ import (
 	. "github.com/onsi/gomega"
 	"golang.org/x/net/context"
 	"gopkg.in/cogger/cogger.v1"
-	. "gopkg.in/cogger/cogger.v1/cogs"
 )
 
 var _ = Describe("ReturnErr", func() {

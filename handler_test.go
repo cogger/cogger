@@ -1,4 +1,4 @@
-package cogger_test
+package cogger
 
 import (
 	"bytes"
@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"golang.org/x/net/context"
-	. "gopkg.in/cogger/cogger.v1"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

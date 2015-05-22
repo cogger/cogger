@@ -1,8 +1,6 @@
-package wait_test
+package wait
 
 import (
-	. "gopkg.in/cogger/cogger.v1/wait"
-
 	"time"
 
 	. "github.com/onsi/ginkgo"

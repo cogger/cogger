@@ -1,9 +1,7 @@
-package wait_test
+package wait
 
 import (
 	"errors"
-
-	. "gopkg.in/cogger/cogger.v1/wait"
 
 	"time"
 

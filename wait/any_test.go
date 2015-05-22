@@ -1,4 +1,4 @@
-package wait_test
+package wait
 
 import (
 	"errors"
@@ -6,7 +6,6 @@ import (
 
 	"golang.org/x/net/context"
 	"gopkg.in/cogger/cogger.v1/cogs"
-	. "gopkg.in/cogger/cogger.v1/wait"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

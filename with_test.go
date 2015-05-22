@@ -1,9 +1,7 @@
-package cogger_test
+package cogger
 
 import (
 	"time"
-
-	. "gopkg.in/cogger/cogger.v1"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

@@ -1,4 +1,4 @@
-package cogs_test
+package cogs
 
 import (
 	. "github.com/onsi/ginkgo"
