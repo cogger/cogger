@@ -1,6 +1,6 @@
 package cogs
 
-import "github.com/cogger/cogger"
+import "gopkg.in/cogger/cogger.v1"
 
 //NoOp creates a cog that instantly returns
 func NoOp() cogger.Cog {

@@ -4,9 +4,9 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/cogger/cogger/cogs"
-	. "github.com/cogger/cogger/limiter"
 	"golang.org/x/net/context"
+	"gopkg.in/cogger/cogger.v1/cogs"
+	. "gopkg.in/cogger/cogger.v1/limiter"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

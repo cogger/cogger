@@ -1,6 +1,6 @@
 package cogs
 
-import "github.com/cogger/cogger"
+import "gopkg.in/cogger/cogger.v1"
 
 //ReturnErr creates a cog that instantly returns the error given to it
 func ReturnErr(err error) cogger.Cog {

@@ -3,8 +3,8 @@ package wait
 import (
 	"sync"
 
-	"github.com/cogger/cogger"
 	"golang.org/x/net/context"
+	"gopkg.in/cogger/cogger.v1"
 )
 
 //Settle will execute all cogs in parallel and return in cog order all the states of the code when all are finished.

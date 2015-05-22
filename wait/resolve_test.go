@@ -1,14 +1,14 @@
 package wait_test
 
 import (
-	. "github.com/cogger/cogger/wait"
+	. "gopkg.in/cogger/cogger.v1/wait"
 
 	"errors"
 
-	"github.com/cogger/cogger/cogs"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"golang.org/x/net/context"
+	"gopkg.in/cogger/cogger.v1/cogs"
 )
 
 var _ = Describe("Resolve", func() {

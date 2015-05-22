@@ -4,8 +4,8 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/cogger/cogger"
 	"golang.org/x/net/context"
+	"gopkg.in/cogger/cogger.v1"
 )
 
 //ErrNonePassed is the error for when no cogs finish without an error in an Any call

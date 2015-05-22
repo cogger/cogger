@@ -1,8 +1,8 @@
 package cogs
 
 import (
-	"github.com/cogger/cogger"
 	"golang.org/x/net/context"
+	"gopkg.in/cogger/cogger.v1"
 )
 
 //Simple will create a cog that follows the basic context cancellation pattern

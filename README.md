@@ -1,6 +1,6 @@
 # cogger 
 
-[![GoDoc](https://godoc.org/github.com/cogger/cogger?status.png)](http://godoc.org/github.com/cogger/cogger)  
+[![GoDoc](https://godoc.org/gopkg.in/cogger/cogger.v1?status.png)](http://godoc.org/gopkg.in/cogger/cogger.v1)  
 [![Build Status](https://travis-ci.org/cogger/cogger.svg?branch=master)](https://travis-ci.org/cogger/cogger)  
 [![Coverage Status](https://coveralls.io/repos/cogger/cogger/badge.svg?branch=master)](https://coveralls.io/r/cogger/cogger?branch=master)  
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
@@ -31,7 +31,7 @@ import (
 	"net/http"
 	"html"
 	"fmt"
-	"github.com/cogger/cogger"
+	"gopkg.in/cogger/cogger.v1"
 	"golang.org/x/net/context"
 )
 
@@ -57,7 +57,7 @@ func main() {
 package main
 
 import (
-	"github.com/cogger/cogger"
+	"gopkg.in/cogger/cogger.v1"
 	"golang.org/x/net/context"
 )
 
@@ -77,7 +77,7 @@ package main
 import (
 	"log"
 	"net/http"
-	"github.com/cogger/cogger"
+	"gopkg.in/cogger/cogger.v1"
 	"github.com/cogger/cloudcontext"
 	"github.com/cogger/cloudcontext/client"
 	"github.com/cogger/cloudcontext/bq"
@@ -107,10 +107,10 @@ You can setup complex interactions on how you want your cogs to run.  This will 
 package main
 
 import (
-	"github.com/cogger/cogger/cogs"
-	"github.com/cogger/cogger/order"
-	"github.com/cogger/cogger/wait"
-	"github.com/cogger/cogger"
+	"gopkg.in/cogger/cogger.v1/cogs"
+	"gopkg.in/cogger/cogger.v1/order"
+	"gopkg.in/cogger/cogger.v1/wait"
+	"gopkg.in/cogger/cogger.v1"
 	"golang.org/x/net/context"
 	"time"
 )
@@ -178,10 +178,10 @@ You can determine how cogs are limited.  You can allows X cogs to start per seco
 package main
 
 import (
-	"github.com/cogger/cogger/cogs"
-	"github.com/cogger/cogger/order"
-	"github.com/cogger/cogger/wait"
-	"github.com/cogger/cogger"
+	"gopkg.in/cogger/cogger.v1/cogs"
+	"gopkg.in/cogger/cogger.v1/order"
+	"gopkg.in/cogger/cogger.v1/wait"
+	"gopkg.in/cogger/cogger.v1"
 	"golang.org/x/net/context"
 	"time"
 )

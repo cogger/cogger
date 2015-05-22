@@ -5,8 +5,8 @@ import (
 	"math"
 	"time"
 
-	"github.com/cogger/cogger"
 	"golang.org/x/net/context"
+	"gopkg.in/cogger/cogger.v1"
 )
 
 //ErrRetry is the error that should be returned when a Retry cog should retry

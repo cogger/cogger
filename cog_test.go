@@ -4,8 +4,8 @@ import (
 	"errors"
 	"reflect"
 
-	. "github.com/cogger/cogger"
 	"golang.org/x/net/context"
+	. "gopkg.in/cogger/cogger.v1"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

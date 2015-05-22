@@ -1,8 +1,8 @@
 package order
 
 import (
-	"github.com/cogger/cogger"
 	"golang.org/x/net/context"
+	"gopkg.in/cogger/cogger.v1"
 )
 
 //Series will execute the workers in order.

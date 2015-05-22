@@ -3,8 +3,8 @@ package cogs
 import (
 	"net/http"
 
-	"github.com/cogger/cogger"
 	"golang.org/x/net/context"
+	"gopkg.in/cogger/cogger.v1"
 )
 
 //Request is a special cog for executing http.Request

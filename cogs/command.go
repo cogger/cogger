@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"os/exec"
 
-	"github.com/cogger/cogger"
 	"golang.org/x/net/context"
+	"gopkg.in/cogger/cogger.v1"
 )
 
 //Command creates a cog that runs the command with the arguments provided
