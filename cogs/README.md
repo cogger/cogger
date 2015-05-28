@@ -74,3 +74,31 @@ withoutput := cogs.CommandWithOutput(ctx, buf, "command",[]string{"arg1","arg2"}
 cmd := exec.Command("command",[]string{"arg1","arg2"})
 raw := cogs.ExecuteCommand(ctx,cmd)
 ~~~
+
+### DeferredCreate
+
+DeferredCreate defers the time of creation of a cog until right before it needs to execute.  This will allow you to set parameters or other variables in prevous cogs in a series without having to do change the workflow into multiple workflows.
+
+~~~ go
+ctx := context.Background()
+
+var subWorkers []cogger.Cog
+wait.Resolve(ctx, 
+	order.series(ctx,
+		cogs.Simple(ctx, func()error{
+			//get something from db
+			//split each chunk into its own worker
+			for _, subStuff := range stuffFromDB{
+				workload := subStuff
+				subWorkers = append(subWorkers,cog.Simple(ctx,func()error{
+					//do work on workload
+					return nil
+				})
+			}
+		}),
+		cogs.DeferredCreate(func()cogger.Cog{
+			return order.Parallel(ctx, subWorkers...)
+		}),
+	),
+)
+~~~
