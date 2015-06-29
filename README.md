@@ -78,9 +78,9 @@ import (
 	"log"
 	"net/http"
 	"gopkg.in/cogger/cogger.v1"
-	"github.com/cogger/cloudcontext"
-	"github.com/cogger/cloudcontext/client"
-	"github.com/cogger/cloudcontext/bq"
+	"gopkg.in/cogger/cloudcontext.v1"
+	"gopkg.in/cogger/cloudcontext.v1/client"
+	"gopkg.in/cogger/cloudcontext.v1/bq"
 	"golang.org/x/net/context"
 )
 
