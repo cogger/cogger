@@ -58,6 +58,7 @@ func (h *defaultHandler) SetHandler(f func(context.Context, http.ResponseWriter,
 }
 
 func (h *defaultHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	defer r.Body.Close()
 	ctx, cancel := context.WithTimeout(base(r), h.timeout)
 	defer cancel()
 	for _, creator := range h.ctxCreators {
@@ -72,7 +73,7 @@ func (h *defaultHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	select {
 	case <-ctx.Done():
-		status = http.StatusInternalServerError
+		status = http.StatusRequestTimeout
 	case status = <-output:
 	}
 
