@@ -76,7 +76,6 @@ var _ = Describe("DeferredCreate", func() {
 		Expect(limit.NextHits).To(Equal(1))
 		Expect(limit.Completed).To(BeTrue())
 	})
-
 })
 
 type mockLimit struct {
@@ -91,7 +90,6 @@ func (limit *mockLimit) Next(ctx context.Context) chan struct{} {
 		next <- struct{}{}
 	}()
 	return next
-
 }
 
 func (limit *mockLimit) Done(ctx context.Context) {
