@@ -131,4 +131,46 @@ var _ = Describe("Series", func() {
 		}
 		Expect(order).To(HaveLen(1))
 	})
+
+	It("should not exit on failure", func() {
+		ctx := context.Background()
+
+		ErrFake := errors.New("fake error")
+
+		order := []int{}
+		cog := Series(ctx,
+			cogs.Simple(ctx, func() error {
+				time.Sleep(100 * time.Millisecond)
+				order = append(order, 0)
+				return ErrFake
+			}),
+			cogs.Simple(ctx, func() error {
+				time.Sleep(75 * time.Millisecond)
+				order = append(order, 1)
+				return nil
+			}),
+			cogs.Simple(ctx, func() error {
+				time.Sleep(50 * time.Millisecond)
+				order = append(order, 2)
+				return nil
+			}),
+			cogs.Simple(ctx, func() error {
+				time.Sleep(25 * time.Millisecond)
+				order = append(order, 3)
+				return nil
+			}),
+			cogs.Simple(ctx, func() error {
+				order = append(order, 4)
+				return nil
+			}),
+		)
+		for range cog.Do(ctx) {
+		}
+		for i, o := range order {
+			Expect(o).To(Equal(i))
+		}
+		Expect(order).To(HaveLen(5))
+
+	})
+
 })

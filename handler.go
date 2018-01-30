@@ -37,7 +37,7 @@ func WithHandler(f func(context.Context, http.ResponseWriter, *http.Request) int
 func NewHandler() Handler {
 	return &defaultHandler{
 		f:           noOp,
-		timeout:     30 * time.Second,
+		timeout:     29750 * time.Millisecond,
 		ctxCreators: []func(context.Context, *http.Request) context.Context{},
 	}
 }
